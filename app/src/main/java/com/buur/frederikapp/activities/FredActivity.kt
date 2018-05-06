@@ -35,7 +35,7 @@ abstract class FredActivity : AppCompatActivity(){
             return this as? MainActivity
         }
 
-    fun navigateToFragment(fragment: Fragment, argument: Bundle?, shouldAddToBackStack: Boolean? = true) {
+    fun navigateToFragment(fragment: Fragment, argument: Bundle? = null, shouldAddToBackStack: Boolean? = true) {
 
         fragment.arguments = argument
         val supFragMan = supportFragmentManager.beginTransaction()
@@ -47,7 +47,7 @@ abstract class FredActivity : AppCompatActivity(){
             }
         }
 
-        fragmentContainer?.let { supFragMan.add(fragmentContainer, fragment) }
+        fragmentContainer?.let { supFragMan.replace(fragmentContainer, fragment) }
 
         if (shouldAddToBackStack == true) {
             val fragTag = fragment.tag

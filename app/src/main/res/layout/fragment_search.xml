@@ -8,37 +8,61 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:clipChildren="false"
-        android:layout_marginStart="@dimen/padding_24"
         android:layout_marginEnd="@dimen/padding_24"
+        android:layout_marginStart="@dimen/padding_24"
+        android:clipChildren="false"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <android.support.design.widget.TextInputLayout
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="@dimen/padding_8">
+            android:layout_marginBottom="@dimen/padding_12">
 
-            <android.support.design.widget.TextInputEditText
-                android:hint="Summoner name..."
-                android:layout_width="match_parent"
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/searchInputContainer"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:lines="1"
-                android:inputType="text"
-                android:imeOptions="actionSearch"/>
-        </android.support.design.widget.TextInputLayout>
+                android:layout_gravity="center_horizontal"
+                android:layout_marginEnd="@dimen/padding_8"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/searchButtonSearch"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <android.support.design.widget.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Summoner name..."
+                    android:imeOptions="actionSearch"
+                    android:inputType="text"
+                    android:lines="1" />
+            </android.support.design.widget.TextInputLayout>
+
+            <Button
+                android:text="Search"
+                android:id="@+id/searchButtonSearch"
+                style="@style/ButtonPrimary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                app:layout_constraintStart_toEndOf="@id/searchInputContainer"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+        </android.support.constraint.ConstraintLayout>
 
         <Button
-            android:text="Search"
-            android:id="@+id/searchButtonPrimary"
+            android:text="Champion database"
+            android:id="@+id/searchButtonChampionDatabase"
             style="@style/ButtonPrimary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"/>
+
 
     </LinearLayout>
 
