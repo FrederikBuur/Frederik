@@ -7,11 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import com.buur.frederikapp.R
 import com.buur.frederikapp.fragments.FredFragment
+import com.buur.frederikapp.models.Champion
 import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.fragment_champion_list.*
 
 class ChampionsListFragment : FredFragment() {
 
     private var championsController: ChampionsController? = null
+    private var adapter: ChampionListAdapter? = null
+    private var championList: ArrayList<Champion>? = null
 
     private val controller: ChampionsController
         get() {
@@ -26,18 +30,32 @@ class ChampionsListFragment : FredFragment() {
         return view
     }
 
-    private fun fetchChampions() {
+    override fun onStart() {
+        super.onStart()
+        setup()
+    }
 
-            controller.fetchChampionList()
-                    .subscribeOn(Schedulers.io())
-                    .doFinally {
-                        context?.let { con ->
-                            mainActivity?.makeToast(con, "Champions have been fetched")
-                        }
+    private fun setup() {
+        if (championList == null) { championList = ArrayList() }
+        context?.let {
+            adapter = ChampionListAdapter(it, championList)
+            championListRecyclerView?.adapter = adapter
+        }
+    }
+
+    private fun fetchChampions() {
+        controller.fetchChampionList()
+                .subscribeOn(Schedulers.io())
+                .doFinally {
+                    context?.let { con ->
+                        mainActivity?.makeToast(con, "Champions have been fetched")
                     }
-                    .subscribe { championList ->
-                        // save into realm
-                    }
+                }
+                .subscribe { championListResponse ->
+                    // save into realm
+                    championList?.addAll(championListResponse.data.values.toList())
+                    adapter?.notifyDataSetChanged()
+                }
     }
 
 }
