@@ -57,8 +57,8 @@ abstract class FredActivity : AppCompatActivity(){
         hideKeyboard(this)
     }
 
-    fun makeToast(context: Context, message: String) {
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+    fun makeToast(context: Context?, message: String?) {
+        Toast.makeText(context, message, Toast.LENGTH_LONG).show()
     }
 
     private fun hideKeyboard(activity: Activity) {

@@ -10,7 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class ServiceGenerator {
 
     companion object {
-        const val API_KEY = "RGAPI-490c847c-67ec-477b-a731-785d60b782d4"
+        const val API_KEY = "RGAPI-9cc24396-60b9-4605-b75f-138dbb2438df"
         const val BASE_URL = "https://euw1.api.riotgames.com"
     }
 

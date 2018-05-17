@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'realm-android'
+apply plugin: 'io.fabric'
 
 ext {
     Glide = '4.7.1'                   // https://github.com/bumptech/glide/releases
@@ -37,14 +38,10 @@ dependencies {
     // Okhhtp
     implementation 'com.squareup.okhttp3:logging-interceptor:' + OkhttpVersion
     // RxJava
-    implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
-    // https://github.com/ReactiveX/RxAndroid/releases
-    implementation 'io.reactivex.rxjava2:rxjava:2.1.13'
-    // https://github.com/ReactiveX/RxJava/releases
-    implementation 'io.reactivex.rxjava2:rxkotlin:2.2.0'
-    // https://github.com/ReactiveX/RxKotlin/releases
-    implementation 'com.github.davidmoten:rxjava2-extras:0.1.22'
-    // https://github.com/davidmoten/rxjava2-extras/releases
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.2' // https://github.com/ReactiveX/RxAndroid/releases
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.13' // https://github.com/ReactiveX/RxJava/releases
+    implementation 'io.reactivex.rxjava2:rxkotlin:2.2.0' // https://github.com/ReactiveX/RxKotlin/releases
+    implementation 'com.github.davidmoten:rxjava2-extras:0.1.22' // https://github.com/davidmoten/rxjava2-extras/releases
     implementation 'com.trello.rxlifecycle2:rxlifecycle:' + trelloRxlifecycle,
             'com.trello.rxlifecycle2:rxlifecycle-components:' + trelloRxlifecycle
     implementation 'com.jakewharton.rxbinding2:rxbinding:' + rxBindings,
@@ -61,6 +58,7 @@ dependencies {
             'com.google.firebase:firebase-analytics:' + Firebase,
             'com.google.firebase:firebase-ads:' + Firebase,
             'com.google.firebase:firebase-config:' + Firebase
+    implementation 'com.google.android.gms:play-services-ads:' + Firebase
     // Android support libraries
     implementation 'com.android.support:customtabs:' + SupportVersion,
             'com.android.support:appcompat-v7:' + SupportVersion,
@@ -76,11 +74,11 @@ dependencies {
     implementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
     // https://github.com/square/leakcanary/releases
     // realm recycler adapter
-    implementation 'io.realm:android-adapters:3.0.0'
-    // https://github.com/realm/realm-android-adapters/releases
+    implementation 'io.realm:android-adapters:3.0.0' // https://github.com/realm/realm-android-adapters/releases
     // swipe reveal layout
-    implementation 'com.chauthai.swipereveallayout:swipe-reveal-layout:1.4.1'
-    // https://github.com/chthai64/SwipeRevealLayout/releases
+    implementation 'com.chauthai.swipereveallayout:swipe-reveal-layout:1.4.1'  // https://github.com/chthai64/SwipeRevealLayout/releases
+
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
 }
 
 android {
@@ -100,3 +98,5 @@ android {
         }
     }
 }
+
+apply plugin: 'com.google.gms.google-services'

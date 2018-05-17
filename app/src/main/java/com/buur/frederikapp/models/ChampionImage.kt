@@ -1,8 +1,13 @@
 package com.buur.frederikapp.models
 
-class ChampionImage(
-        val full: String,
-        val group: String,
-        val sprite: String
-) {
+import io.realm.RealmObject
+
+open class ChampionImage: RealmObject {
+
+    var full: String? = null
+    var group: String? = null
+    var sprite: String? = null
+
+    constructor()
+
 }

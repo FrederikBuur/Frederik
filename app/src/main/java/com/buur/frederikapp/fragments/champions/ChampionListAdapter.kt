@@ -11,7 +11,7 @@ import com.buur.frederikapp.views.SharedProgressView
 class ChampionListAdapter(val context: Context, var championList: ArrayList<Champion>?) : RecyclerView.Adapter<ChampionListAdapter.ChampionViewHolder>() {
 
     enum class ChampionListItemType {
-        Champion, Progress, Ad
+        Champion, Ad
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChampionViewHolder {
@@ -19,7 +19,6 @@ class ChampionListAdapter(val context: Context, var championList: ArrayList<Cham
         return ChampionViewHolder(
                 when (viewType) {
                     ChampionListItemType.Champion.ordinal -> ChampionItemView(context)
-                    ChampionListItemType.Progress.ordinal -> SharedProgressView(context)
                     ChampionListItemType.Ad.ordinal -> SharedProgressView(context)
                     else -> {
                         SharedProgressView(context) // should never happen
@@ -33,21 +32,19 @@ class ChampionListAdapter(val context: Context, var championList: ArrayList<Cham
         val itemView = holder.itemView
         val champion = getChampion(position)
 
-        when(itemView) {
+        when (itemView) {
             is ChampionItemView -> itemView.setup(champion, context)
-            is SharedProgressView -> itemView.setup()
             else -> {
                 // should never happen
             }
         }
-
     }
 
     override fun getItemCount(): Int {
         return championList?.size ?: 0
     }
 
-    private fun getChampion(position: Int) : Champion? {
+    private fun getChampion(position: Int): Champion? {
         return championList?.getOrNull(position)
     }
 

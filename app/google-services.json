@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "112666032144",
+    "firebase_url": "https://frederikapp-14f55.firebaseio.com",
+    "project_id": "frederikapp-14f55",
+    "storage_bucket": "frederikapp-14f55.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:112666032144:android:3cb4c308ef1b8e70",
+        "android_client_info": {
+          "package_name": "com.buur.frederikapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "112666032144-830cj53qcj072qkiep2masvkuo2trol3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.buur.frederikapp",
+            "certificate_hash": "21bc48edad9e8c5ab8eaff28d7126d9bc6b90ab5"
+          }
+        },
+        {
+          "client_id": "112666032144-ei2li56alo3ju7arpteqgtaekeocldpn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtoeWHWXi7r-zJ3xGJXoMiQdCFc_R9X-I"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "112666032144-ei2li56alo3ju7arpteqgtaekeocldpn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
