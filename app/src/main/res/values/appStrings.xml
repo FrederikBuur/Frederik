@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--Adds -->
+    <string name="admob_app_id">ca-app-pub-5253579581493844~4796151099</string>
+    <string name="my_test_device_id">2F8F7EC35969D2D401AEF104C1DC3BC0</string>
+    <string name="banner_ad_unit_id">ca-app-pub-5253579581493844/1758692702</string>
+
+</resources>

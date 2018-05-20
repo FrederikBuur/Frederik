@@ -1,7 +1,9 @@
-package com.buur.frederikapp
+package com.buur.frederikapp.controllers
 
 import android.app.Application
 import android.content.Context
+import com.buur.frederikapp.BuildConfig
+import com.buur.frederikapp.R
 import com.crashlytics.android.Crashlytics
 import com.crashlytics.android.core.CrashlyticsCore
 import com.google.android.gms.ads.MobileAds

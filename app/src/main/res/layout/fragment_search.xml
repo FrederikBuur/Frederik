@@ -29,11 +29,12 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginEnd="@dimen/padding_8"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/searchButtonSearch"
+                app:layout_constraintEnd_toStartOf="@id/buttonSearch"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent">
 
                 <android.support.design.widget.TextInputEditText
+                    android:id="@+id/searchInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Summoner name..."
@@ -44,7 +45,7 @@
 
             <Button
                 android:text="Search"
-                android:id="@+id/searchButtonSearch"
+                android:id="@+id/buttonSearch"
                 style="@style/ButtonPrimary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -57,7 +58,7 @@
 
         <Button
             android:text="Champion database"
-            android:id="@+id/searchButtonChampionDatabase"
+            android:id="@+id/buttonChampionDatabase"
             style="@style/ButtonPrimary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

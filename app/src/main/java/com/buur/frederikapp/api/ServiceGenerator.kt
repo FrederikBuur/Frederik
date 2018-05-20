@@ -1,6 +1,7 @@
 package com.buur.frederikapp.api
 
 import com.buur.frederikapp.api.interfaces.IChampions
+import com.buur.frederikapp.api.interfaces.ISummoner
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -10,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class ServiceGenerator {
 
     companion object {
-        const val API_KEY = "RGAPI-9cc24396-60b9-4605-b75f-138dbb2438df"
+        const val API_KEY = "RGAPI-6cce07a7-968d-4651-a9b8-d70e09550e37"
         const val BASE_URL = "https://euw1.api.riotgames.com"
     }
 
@@ -32,6 +33,10 @@ class ServiceGenerator {
 
     fun createChampionAPI() : IChampions {
         return getRetrofit().create(IChampions::class.java)
+    }
+
+    fun createSummonerAPI() : ISummoner {
+        return getRetrofit().create(ISummoner::class.java)
     }
 
 }

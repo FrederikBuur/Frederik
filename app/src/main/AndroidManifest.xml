@@ -11,14 +11,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:name=".FredApplication">
-        <activity android:name=".activities.main.MainActivity" >
+        android:name=".controllers.FredApplication">
+        <activity android:name=".activities.main.MainActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="290ec3ed5b8a32226a6672062c4b8cee9288887e" />

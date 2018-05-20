@@ -1,20 +1,16 @@
 package com.buur.frederikapp.fragments.champions
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.buur.frederikapp.R
 import com.buur.frederikapp.api.ErrorHandler
 import com.buur.frederikapp.fragments.FredFragment
 import com.buur.frederikapp.models.Champion
-import com.buur.frederikapp.models.ChampionList
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import io.realm.Realm
-import io.realm.RealmResults
 import kotlinx.android.synthetic.main.fragment_champion_list.*
 import java.util.*
 
@@ -35,6 +31,7 @@ class ChampionsListFragment : FredFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_champion_list, container, false)
 
+        // fetch if sessioncontroller.championList is empty TODO
         fetchChampions()
 
         return view
@@ -59,6 +56,7 @@ class ChampionsListFragment : FredFragment() {
 
     private fun fetchChampions() {
         controller.fetchChampionList()
+//                .compose(bindToLifecycle())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doFinally {
@@ -85,6 +83,7 @@ class ChampionsListFragment : FredFragment() {
             realmResult?.let {
                 championListFromRealm = innerRealm.copyFromRealm(realmResult)
             }
+
 
             championListFromRealm?.let { championList?.addAll(it) }
             adapter?.notifyDataSetChanged()

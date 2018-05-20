@@ -4,6 +4,7 @@ import android.util.Log
 import com.buur.frederikapp.api.ServiceGenerator
 import com.buur.frederikapp.api.ServiceGenerator.Companion.API_KEY
 import com.buur.frederikapp.api.interfaces.IChampions
+import com.buur.frederikapp.controllers.SessionController
 import com.buur.frederikapp.models.Champion
 import com.buur.frederikapp.models.ChampionImage
 import com.buur.frederikapp.models.ChampionList
@@ -36,7 +37,7 @@ class ChampionsController {
                     saveChampionListIntoRealm(championList)
                 }
                 .doOnError {
-                    Log.d(TAG, "Somthing went wrong: ${it.message}")
+                    Log.d(TAG, "Something went wrong: ${it.message}")
                 }
     }
 
@@ -66,6 +67,7 @@ class ChampionsController {
                 championList.add(realmChampion)
             }
             realmChampionList.data = championList
+            // sync realm with session controller. save realmChampionList in session controller TODO
         }
         realm.close()
     }
