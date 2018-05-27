@@ -1,5 +1,6 @@
 package com.buur.frederikapp.activities.main
 
+import android.animation.ObjectAnimator
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -31,20 +32,26 @@ class MainActivity : FredActivity() {
 
     fun startProgress() {
 
-        // fate in loading stuff
-
         mainLoadingContainer.visibility = View.VISIBLE
-        mainLoadingAnimation.visibility = View.VISIBLE
         mainLoadingAnimation.playAnimation()
+
+        // fade in loading stuff
+        val fadeAnimation = ObjectAnimator.ofFloat(mainLoadingContainer, View.ALPHA, 0.0f, 0.5f)
+        fadeAnimation.duration = 225
+        fadeAnimation.start()
 
     }
 
     fun stopProgress() {
 
-        mainLoadingContainer.visibility = View.INVISIBLE
-        mainLoadingAnimation.visibility = View.INVISIBLE
+        mainLoadingContainer.visibility = View.GONE
         mainLoadingAnimation.pauseAnimation()
         mainLoadingAnimation.progress = 0.0f
+
+        // fade out loading stuff
+        val fadeAnimation = ObjectAnimator.ofFloat(mainLoadingContainer, View.ALPHA, 5.0f, 0.0f)
+        fadeAnimation.duration = 225
+        fadeAnimation.start()
 
     }
 
