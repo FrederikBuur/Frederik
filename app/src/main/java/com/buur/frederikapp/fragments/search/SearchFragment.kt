@@ -53,6 +53,9 @@ class SearchFragment : FredFragment(), View.OnClickListener {
                 getController().fetchSummoner(input)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
+                        .doOnSubscribe{
+                            mainActivity?.hideKeyboard()
+                        }
                         .doFinally {
                             if (fetchWentWrong != true)
                             mainActivity?.navigateToFragment(SummonerFragment())

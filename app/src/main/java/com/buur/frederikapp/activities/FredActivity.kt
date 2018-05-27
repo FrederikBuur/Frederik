@@ -54,18 +54,18 @@ abstract class FredActivity : AppCompatActivity(){
             supFragMan.addToBackStack(fragTag)
         }
         supFragMan.commit()
-        hideKeyboard(this)
+        hideKeyboard()
     }
 
     fun makeToast(context: Context?, message: String?) {
         Toast.makeText(context, message, Toast.LENGTH_LONG).show()
     }
 
-    private fun hideKeyboard(activity: Activity) {
-        if (activity.currentFocus == null) return
+    fun hideKeyboard() {
+        if (this.currentFocus == null) return
 
-        val imm = activity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(activity.currentFocus.windowToken, 0)
+        val imm = this.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(this.currentFocus.windowToken, 0)
     }
 
     override fun onBackPressed() {
