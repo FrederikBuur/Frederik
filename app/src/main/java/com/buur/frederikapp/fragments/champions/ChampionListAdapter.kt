@@ -8,7 +8,7 @@ import com.buur.frederikapp.fragments.champions.views.ChampionItemView
 import com.buur.frederikapp.models.Champion
 import com.buur.frederikapp.views.SharedProgressView
 
-class ChampionListAdapter(val context: Context, var championList: ArrayList<Champion>?) : RecyclerView.Adapter<ChampionListAdapter.ChampionViewHolder>() {
+class ChampionListAdapter(val context: Context, var championList: List<Champion>?) : RecyclerView.Adapter<ChampionListAdapter.ChampionViewHolder>() {
 
     enum class ChampionListItemType {
         Champion, Ad

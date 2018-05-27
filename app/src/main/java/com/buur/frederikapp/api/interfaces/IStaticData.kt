@@ -5,7 +5,7 @@ import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface IChampions {
+interface IStaticData {
 
     @GET("/lol/static-data/v3/champions")
     fun getChampionList(
@@ -13,5 +13,10 @@ interface IChampions {
             @Query("champListData") champListData: String,
             @Query("dataById") dataById: Boolean
     ): Observable<ChampionListResponse>
+
+    @GET("/lol/static-data/v3/versions")
+    fun getVersions(
+            @Query("api_key") api_key: String
+    ): Observable<ArrayList<String>>
 
 }

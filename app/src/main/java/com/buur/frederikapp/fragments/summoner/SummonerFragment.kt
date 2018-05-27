@@ -10,11 +10,17 @@ import com.buur.frederikapp.controllers.SessionController
 import com.buur.frederikapp.controllers.SummonerController
 import com.buur.frederikapp.extensions.addProfileIconImagePath
 import com.buur.frederikapp.fragments.FredFragment
+import com.buur.frederikapp.models.Version
+import com.buur.frederikapp.modelsapi.match.MatchResponse
+import io.realm.Realm
 import kotlinx.android.synthetic.main.fragment_summoner.*
 
 class SummonerFragment : FredFragment() {
 
     private var summonerController: SummonerController? = null
+
+    private var adapter: SummonerMatchlistAdapter? = null
+    private var matchList: ArrayList<MatchResponse>? = null
 
     private fun getController(): SummonerController {
         return if (summonerController == null) {
@@ -38,25 +44,39 @@ class SummonerFragment : FredFragment() {
 
     private fun setup() {
 
+        matchList = SessionController.getInstance().summonerSearchResult?.matchList
+        context?.let { adapter = SummonerMatchlistAdapter(it, matchList) }
+        matchesRecyclerView.adapter = adapter
+
         setupSummonerInfo()
+        setupSummonerMatchlist()
 
     }
 
     private fun setupSummonerInfo() {
 
-        val summoner = SessionController.getInstance().summoner
+        val summoner = SessionController.getInstance().summonerSearchResult?.summoner
 
         summonerName.text = summoner?.name
         summonerLevel.text = "Level: ${summoner?.summonerLevel?.toString()}"
 
-        // loads summoner icon
-        context?.let {
-            val profileIconPath = summoner?.profileIconId.toString().addProfileIconImagePath()
-            Glide.with(it)
-                    .load(profileIconPath)
-                    .into(summonerIcon)
+        // loads summonerSearchResult icon
+        context?.let { con ->
+            Realm.getDefaultInstance().use { realm ->
+                val version = realm.where(Version::class.java).findFirst()
+                version?.version?.let {
+                    val profileIconPath = summoner?.profileIconId.toString().addProfileIconImagePath(it)
+                    Glide.with(con)
+                            .load(profileIconPath)
+                            .into(summonerIcon)
+                }
+            }
         }
-
     }
 
+    private fun setupSummonerMatchlist() {
+
+        // load more when scrolling down
+
+    }
 }

@@ -12,4 +12,7 @@
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorDivider">#BDBDBD</color>
 
+    <color name="win">#009600</color>
+    <color name="lose">#c80000</color>
+
 </resources>

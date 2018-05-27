@@ -8,6 +8,8 @@ import com.bumptech.glide.Glide
 import com.buur.frederikapp.R
 import com.buur.frederikapp.extensions.addChampionImagePath
 import com.buur.frederikapp.models.Champion
+import com.buur.frederikapp.models.Version
+import io.realm.Realm
 import kotlinx.android.synthetic.main.view_champion_list_item.view.*
 
 class ChampionItemView : FrameLayout {
@@ -25,8 +27,12 @@ class ChampionItemView : FrameLayout {
     fun setup(champion: Champion?, context: Context) {
         championListItemTitle.text = champion?.name
         championListItemContent.text = champion?.title
-        Glide.with(context)
-                .load(champion?.image?.full?.addChampionImagePath())
-                .into(testImage)
+        Realm.getDefaultInstance().use {realm ->
+            realm.where(Version::class.java).findFirst()?.version?.let {
+                Glide.with(context)
+                        .load(champion?.image?.full?.addChampionImagePath(it))
+                        .into(testImage)
+            }
+        }
     }
 }

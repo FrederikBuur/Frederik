@@ -26,6 +26,33 @@
             android:layout_gravity="center_horizontal"
             ads:adSize="BANNER"
             ads:adUnitId="@string/banner_ad_unit_id"/>
-
     </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/mainLoadingContainer"
+        android:background="@color/colorBlackText"
+        android:alpha="0.5"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible"
+        ads:layout_constraintStart_toStartOf="parent"
+        ads:layout_constraintEnd_toEndOf="parent"
+        ads:layout_constraintTop_toTopOf="parent"
+        ads:layout_constraintBottom_toBottomOf="parent">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/mainLoadingAnimation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/padding_24"
+            ads:lottie_autoPlay="false"
+            ads:lottie_loop="true"
+            ads:lottie_rawRes="@raw/loadinganimation01"/>
+
+    </FrameLayout>
+
+
+
 </android.support.constraint.ConstraintLayout>

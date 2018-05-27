@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <FrameLayout
+        android:id="@+id/matchItemBackground"
+        android:layout_width="10sp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
+
+    </FrameLayout>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/championImage"
+        android:layout_width="@dimen/padding_60"
+        android:layout_height="@dimen/padding_60"
+        android:layout_margin="@dimen/padding_12"
+        android:src="@android:color/transparent"
+        app:civ_border_color="@color/colorBlackText"
+        app:civ_border_width="@dimen/padding_2"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toEndOf="@id/matchItemBackground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/championLevelContainer"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@color/colorAccent"
+        app:layout_constraintBottom_toBottomOf="@id/championImage"
+        app:layout_constraintEnd_toEndOf="@id/championImage" />
+
+    <TextView
+        android:id="@+id/championLevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorWhite"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@id/championLevelContainer"
+        app:layout_constraintEnd_toEndOf="@id/championLevelContainer"
+        app:layout_constraintStart_toStartOf="@id/championLevelContainer"
+        app:layout_constraintTop_toTopOf="@id/championLevelContainer" />
+
+    <TextView
+        android:id="@+id/championScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="@dimen/padding_24"
+        android:text="12/12/12"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/championImage"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/itemContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+
+        <ImageView
+            android:id="@+id/championItem1"
+            android:layout_width="@dimen/padding_24"
+            android:layout_height="@dimen/padding_24" />
+
+        <ImageView
+            android:id="@+id/championItem2"
+            android:layout_width="@dimen/padding_24"
+            android:layout_height="@dimen/padding_24" />
+
+        <ImageView
+            android:id="@+id/championItem3"
+            android:layout_width="@dimen/padding_24"
+            android:layout_height="@dimen/padding_24" />
+
+        <ImageView
+            android:id="@+id/championItem4"
+            android:layout_width="@dimen/padding_24"
+            android:layout_height="@dimen/padding_24" />
+
+        <ImageView
+            android:id="@+id/championItem5"
+            android:layout_width="@dimen/padding_24"
+            android:layout_height="@dimen/padding_24" />
+
+        <ImageView
+            android:id="@+id/championItem6"
+            android:layout_width="@dimen/padding_24"
+            android:layout_height="@dimen/padding_24" />
+
+    </LinearLayout>
+
+
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="0.5dp"
+        android:background="@color/colorDivider"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/matchItemBackground"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</android.support.constraint.ConstraintLayout>

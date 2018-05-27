@@ -12,15 +12,12 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import io.realm.Realm
 import kotlinx.android.synthetic.main.fragment_champion_list.*
-import java.util.*
 
 class ChampionsListFragment : FredFragment() {
 
     private var championsController: ChampionsController? = null
     private var adapter: ChampionListAdapter? = null
-    private var championList: ArrayList<Champion>? = null
-    private var championListFromRealm: List<Champion>? = null
-    private var realm: Realm? = null
+    private var championList: List<Champion>? = null
 
 
     private val controller: ChampionsController
@@ -31,7 +28,7 @@ class ChampionsListFragment : FredFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_champion_list, container, false)
 
-        // fetch if sessioncontroller.championList is empty TODO
+        // fetch if sessioncontroller.championList is empty
         fetchChampions()
 
         return view
@@ -44,7 +41,11 @@ class ChampionsListFragment : FredFragment() {
 
     private fun setup() {
         if (championList == null) {
-            championList = ArrayList()
+            Realm.getDefaultInstance().use { realm ->
+                val realmChampionList = realm.where(Champion::class.java).sort("name").findAll()
+
+                championList = realm.copyFromRealm(realmChampionList)
+            }
         }
         context?.let {
             if (adapter == null) {
@@ -60,34 +61,19 @@ class ChampionsListFragment : FredFragment() {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doFinally {
-                    readChampionList()
+                    readChampionListAndNotify()
                 }
-                .subscribe({ championListResponse ->
-                    championList?.addAll(championListResponse.data.values.toList())
-                    adapter?.notifyDataSetChanged()
-                    context?.let { con ->
-                        mainActivity?.makeToast(con, "Champions have been fetched")
-                    }
-                }, {
-                    mainActivity?.makeToast(context, ErrorHandler.handleError(it))
+                .subscribe({ }, { error ->
+                    ErrorHandler.handleError(error, context)
                 })
     }
 
-    private fun readChampionList() {
-        realm = Realm.getDefaultInstance()
+    private fun readChampionListAndNotify() {
 
-        realm?.executeTransaction {  innerRealm ->
-
-            val realmResult = realm?.where(Champion::class.java)?.sort("name")?.findAll()
-
-            realmResult?.let {
-                championListFromRealm = innerRealm.copyFromRealm(realmResult)
-            }
-
-
-            championListFromRealm?.let { championList?.addAll(it) }
+        Realm.getDefaultInstance().use { realm ->
+            val realmChampionList = realm.where(Champion::class.java).sort("name").findAll()
+            championList = realm.copyFromRealm(realmChampionList)
             adapter?.notifyDataSetChanged()
-
         }
 
     }

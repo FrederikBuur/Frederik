@@ -3,6 +3,7 @@ package com.buur.frederikapp.activities.main
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.view.WindowManager
 import com.buur.frederikapp.BuildConfig
 import com.buur.frederikapp.R
@@ -25,20 +26,32 @@ class MainActivity : FredActivity() {
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
         navigateToFragment(SearchFragment(), null, false )
 
-
         setupAdMob()
+    }
+
+    fun startProgress() {
+
+        // fate in loading stuff
+
+        mainLoadingContainer.visibility = View.VISIBLE
+        mainLoadingAnimation.visibility = View.VISIBLE
+        mainLoadingAnimation.playAnimation()
+
+    }
+
+    fun stopProgress() {
+
+        mainLoadingContainer.visibility = View.INVISIBLE
+        mainLoadingAnimation.visibility = View.INVISIBLE
+        mainLoadingAnimation.pauseAnimation()
+        mainLoadingAnimation.progress = 0.0f
+
     }
 
     private fun setupAdMob() {
         val adRequest = AdRequest.Builder()
                 .addTestDevice(getString(R.string.my_test_device_id))
                 .build()
-
-        if (!BuildConfig.DEBUG) {
-            makeToast(this, "Endelig ikke i debug")
-        } else {
-            makeToast(this, "stadig i debug")
-        }
         adView?.loadAd(adRequest)
     }
 }

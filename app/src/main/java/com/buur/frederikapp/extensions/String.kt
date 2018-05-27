@@ -1,11 +1,11 @@
 package com.buur.frederikapp.extensions
 
-const val ddragonVersion = "8.8.1"
+import com.buur.frederikapp.controllers.SessionController
 
-fun String.addChampionImagePath(): String {
-    return "http://ddragon.leagueoflegends.com/cdn/$ddragonVersion/img/champion/$this"
+fun String.addChampionImagePath(version: String): String {
+    return "http://ddragon.leagueoflegends.com/cdn/$version/img/champion/$this"
 }
 
-fun String.addProfileIconImagePath(): String {
-    return "http://ddragon.leagueoflegends.com/cdn/$ddragonVersion/img/profileicon/$this.png"
+fun String.addProfileIconImagePath(version: String): String {
+    return "http://ddragon.leagueoflegends.com/cdn/$version/img/profileicon/$this.png"
 }
