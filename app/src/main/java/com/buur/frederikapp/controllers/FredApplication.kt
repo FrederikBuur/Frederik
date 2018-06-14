@@ -21,13 +21,9 @@ class FredApplication : Application() {
         // init realm
         setupRealm()
 
-        // update champions in realm
-
         // AdMob
         MobileAds.initialize(this, getString(R.string.admob_app_id))
 
-        // Check for newest version
-        getCurrentVersion()
 
         initFabric(this)
     }
@@ -42,12 +38,6 @@ class FredApplication : Application() {
         val core = CrashlyticsCore.Builder().disabled(BuildConfig.DEBUG).build()
         val kit = Crashlytics.Builder().core(core).build()
         Fabric.with(context, kit)
-    }
-
-    private fun getCurrentVersion() {
-        SessionController.getInstance().getVersions()
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({}, {})
     }
 
 }

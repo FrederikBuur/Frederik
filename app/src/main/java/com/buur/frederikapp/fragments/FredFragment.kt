@@ -1,10 +1,9 @@
 package com.buur.frederikapp.fragments
 
-import android.support.v4.app.Fragment
 import com.buur.frederikapp.activities.main.MainActivity
-import com.trello.rxlifecycle2.components.RxFragment
+import com.trello.rxlifecycle2.components.support.RxFragment
 
-abstract class FredFragment : Fragment() {
+abstract class FredFragment : RxFragment() {
 
     protected val mainActivity: MainActivity?
         get() {

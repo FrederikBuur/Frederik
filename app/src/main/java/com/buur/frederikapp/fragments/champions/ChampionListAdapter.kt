@@ -4,7 +4,7 @@ import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import com.buur.frederikapp.fragments.champions.views.ChampionItemView
+import com.buur.frederikapp.fragments.champions.views.ChampionRowView
 import com.buur.frederikapp.models.Champion
 import com.buur.frederikapp.views.SharedProgressView
 
@@ -18,7 +18,7 @@ class ChampionListAdapter(val context: Context, var championList: List<Champion>
 
         return ChampionViewHolder(
                 when (viewType) {
-                    ChampionListItemType.Champion.ordinal -> ChampionItemView(context)
+                    ChampionListItemType.Champion.ordinal -> ChampionRowView(context)
                     ChampionListItemType.Ad.ordinal -> SharedProgressView(context)
                     else -> {
                         SharedProgressView(context) // should never happen
@@ -33,7 +33,7 @@ class ChampionListAdapter(val context: Context, var championList: List<Champion>
         val champion = getChampion(position)
 
         when (itemView) {
-            is ChampionItemView -> itemView.setup(champion, context)
+            is ChampionRowView -> itemView.setup(champion, context)
             else -> {
                 // should never happen
             }

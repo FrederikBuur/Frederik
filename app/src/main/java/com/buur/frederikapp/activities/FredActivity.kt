@@ -10,9 +10,10 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import com.buur.frederikapp.activities.main.MainActivity
 import com.buur.frederikapp.fragments.FredFragment
+import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
-abstract class FredActivity : AppCompatActivity(){
+abstract class FredActivity : RxAppCompatActivity(){
 
     val screenDimensions: DisplayMetrics
         get() {

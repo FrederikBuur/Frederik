@@ -8,7 +8,8 @@ import com.bumptech.glide.Glide
 import com.buur.frederikapp.R
 import com.buur.frederikapp.controllers.SessionController
 import com.buur.frederikapp.controllers.SummonerController
-import com.buur.frederikapp.extensions.addProfileIconImagePath
+import com.buur.frederikapp.devutility.ImageLoader
+import com.buur.frederikapp.devutility.extensions.addProfileIconImagePath
 import com.buur.frederikapp.fragments.FredFragment
 import com.buur.frederikapp.models.Version
 import com.buur.frederikapp.modelsapi.match.MatchResponse
@@ -21,14 +22,6 @@ class SummonerFragment : FredFragment() {
 
     private var adapter: SummonerMatchlistAdapter? = null
     private var matchList: ArrayList<MatchResponse>? = null
-
-    private fun getController(): SummonerController {
-        return if (summonerController == null) {
-            SummonerController()
-        } else {
-            summonerController!!
-        }
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -63,12 +56,9 @@ class SummonerFragment : FredFragment() {
         // loads summonerSearchResult icon
         context?.let { con ->
             Realm.getDefaultInstance().use { realm ->
-                val version = realm.where(Version::class.java).findFirst()
-                version?.version?.let {
+                Version.getLocalVersion(realm)?.let {
                     val profileIconPath = summoner?.profileIconId.toString().addProfileIconImagePath(it)
-                    Glide.with(con)
-                            .load(profileIconPath)
-                            .into(summonerIcon)
+                    ImageLoader.InsertImage(con, summonerIcon, profileIconPath)
                 }
             }
         }

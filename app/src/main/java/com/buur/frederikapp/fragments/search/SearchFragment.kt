@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.buur.frederikapp.R
 import com.buur.frederikapp.api.ErrorHandler
-import com.buur.frederikapp.controllers.SessionController
 import com.buur.frederikapp.controllers.SummonerController
 import com.buur.frederikapp.fragments.FredFragment
 import com.buur.frederikapp.fragments.champions.ChampionsListFragment
@@ -14,7 +13,6 @@ import com.buur.frederikapp.fragments.summoner.SummonerFragment
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_search.*
-import java.net.SocketTimeoutException
 import java.util.regex.Pattern
 
 class SearchFragment : FredFragment(), View.OnClickListener {
@@ -46,16 +44,19 @@ class SearchFragment : FredFragment(), View.OnClickListener {
     private fun searchSummonerFlow() {
         mainActivity?.startProgress()
 
-        val searchInput = searchInputContainer.editText?.text?.toString()?.trim()
-        searchInput?.let { input ->
+        val searchInputText = searchInputContainer.editText?.text?.toString()?.trim()
+        searchInputText?.let { input ->
             if (isNameValid(input)) {
 
+                mainActivity?.hideKeyboard()
+//                searchInputContainer.isFocusable = false
+                searchInput.isFocusable = false
+
+
                 getController().fetchSummoner(input)
+                        .compose(bindToLifecycle())
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .doOnSubscribe{
-                            mainActivity?.hideKeyboard()
-                        }
                         .doFinally {
                             if (fetchWentWrong != true)
                             mainActivity?.navigateToFragment(SummonerFragment())
@@ -66,7 +67,6 @@ class SearchFragment : FredFragment(), View.OnClickListener {
                         }, { error ->
                             fetchWentWrong = true
                             ErrorHandler.handleError(error, context)
-                            // if 404 summonerSearchResult findes ikke
                         })
 
             } else {
@@ -77,7 +77,7 @@ class SearchFragment : FredFragment(), View.OnClickListener {
         }
     }
 
-    private fun isNameValid(name: String?) : Boolean {
+    private fun isNameValid(name: String?): Boolean {
 
         if ((name?.length ?: 0) <= 2) return false
 
@@ -88,12 +88,12 @@ class SearchFragment : FredFragment(), View.OnClickListener {
 
     override fun onClick(v: View?) {
 
-        when(v) {
+        when (v) {
             buttonChampionDatabase -> {
                 mainActivity?.navigateToFragment(ChampionsListFragment())
             }
             buttonSearch -> {
-               searchSummonerFlow()
+                searchSummonerFlow()
             }
         }
 

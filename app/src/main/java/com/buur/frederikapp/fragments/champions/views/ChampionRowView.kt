@@ -4,15 +4,15 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
-import com.bumptech.glide.Glide
 import com.buur.frederikapp.R
-import com.buur.frederikapp.extensions.addChampionImagePath
+import com.buur.frederikapp.devutility.ImageLoader
+import com.buur.frederikapp.devutility.extensions.addChampionImagePath
 import com.buur.frederikapp.models.Champion
 import com.buur.frederikapp.models.Version
 import io.realm.Realm
-import kotlinx.android.synthetic.main.view_champion_list_item.view.*
+import kotlinx.android.synthetic.main.view_champion_list_row.view.*
 
-class ChampionItemView : FrameLayout {
+class ChampionRowView : FrameLayout {
 
     constructor(context: Context) : super(context) {
         inflateView()
@@ -21,7 +21,7 @@ class ChampionItemView : FrameLayout {
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
     private fun inflateView() {
-        View.inflate(context, R.layout.view_champion_list_item,this)
+        View.inflate(context, R.layout.view_champion_list_row,this)
     }
 
     fun setup(champion: Champion?, context: Context) {
@@ -29,9 +29,8 @@ class ChampionItemView : FrameLayout {
         championListItemContent.text = champion?.title
         Realm.getDefaultInstance().use {realm ->
             realm.where(Version::class.java).findFirst()?.version?.let {
-                Glide.with(context)
-                        .load(champion?.image?.full?.addChampionImagePath(it))
-                        .into(testImage)
+                val championImg = champion?.image?.full?.addChampionImagePath(it)
+                ImageLoader.InsertImage(context, testImage, championImg)
             }
         }
     }

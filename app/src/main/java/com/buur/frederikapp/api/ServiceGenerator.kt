@@ -11,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class ServiceGenerator {
 
     companion object {
-        const val API_KEY = "RGAPI-74824a54-b53d-4b51-9bf0-946e2596c8e6"
+        const val API_KEY = "RGAPI-ba4a62c1-2695-4650-833a-5f23eb37a7c9"
         const val BASE_URL = "https://euw1.api.riotgames.com"
     }
 
@@ -31,7 +31,7 @@ class ServiceGenerator {
         return  retrofit!!
     }
 
-    fun createChampionAPI() : IStaticData {
+    fun createStaticDataAPI() : IStaticData {
         return getRetrofit().create(IStaticData::class.java)
     }
 

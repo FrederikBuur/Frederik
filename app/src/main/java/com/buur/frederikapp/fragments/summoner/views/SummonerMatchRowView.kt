@@ -1,28 +1,27 @@
 package com.buur.frederikapp.fragments.summoner.views
 
 import android.content.Context
-import android.util.AttributeSet
 import android.view.View
-import com.bumptech.glide.Glide
 import com.buur.frederikapp.R
 import com.buur.frederikapp.controllers.SessionController
-import com.buur.frederikapp.extensions.addChampionImagePath
+import com.buur.frederikapp.devutility.ImageLoader
+import com.buur.frederikapp.devutility.extensions.addChampionImagePath
 import com.buur.frederikapp.models.Champion
 import com.buur.frederikapp.models.Version
 import com.buur.frederikapp.modelsapi.SummonerResponse
 import com.buur.frederikapp.modelsapi.match.MatchResponse
 import com.buur.frederikapp.modelsapi.match.Participant
 import io.realm.Realm
-import kotlinx.android.synthetic.main.view_summoner_matchlist_item_match.view.*
+import kotlinx.android.synthetic.main.view_summoner_matchlist_row_match.view.*
 
-class SummonerMatchItemView(context: Context) : SummonerSuperItemView(context) {
+class SummonerMatchRowView(context: Context) : SummonerSuperRowView(context) {
 
     var summoner: SummonerResponse? = null
     var match: MatchResponse? = null
     var participant: Participant? = null
 
     init {
-        View.inflate(context, R.layout.view_summoner_matchlist_item_match, this)
+        View.inflate(context, R.layout.view_summoner_matchlist_row_match, this)
     }
 
     override fun setup(match: MatchResponse?) {
@@ -33,8 +32,7 @@ class SummonerMatchItemView(context: Context) : SummonerSuperItemView(context) {
         determineWin()
         populateScore()
         populateChampion()
-        populateSummonerSpells()
-        populateItems()
+        populateItemsAndSpells()
 
     }
 
@@ -80,20 +78,17 @@ class SummonerMatchItemView(context: Context) : SummonerSuperItemView(context) {
 
         Realm.getDefaultInstance().use { realm ->
             realm.where(Champion::class.java).equalTo("id", id).findFirst()?.let { champion ->
-                realm.where(Version::class.java).findFirst()?.version?.let { version ->
-                    Glide.with(context)
-                            .load(champion.image?.full?.addChampionImagePath(version))
-                            .into(championImage)
+                Version.getLocalVersion(realm)?.let { version ->
+                    val championImg = champion.image?.full?.addChampionImagePath(version)
+                    ImageLoader.InsertImage(context, championImageView, championImg)
                 }
             }
         }
     }
 
-    private fun populateSummonerSpells() {
+    private fun populateItemsAndSpells() {
 
-    }
-
-    private fun populateItems() {
+        itemContainer.setupItemSpellView(participant)
 
     }
 

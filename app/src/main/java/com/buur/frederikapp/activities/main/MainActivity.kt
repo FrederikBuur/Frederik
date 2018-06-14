@@ -9,9 +9,13 @@ import android.view.WindowManager
 import com.buur.frederikapp.BuildConfig
 import com.buur.frederikapp.R
 import com.buur.frederikapp.activities.FredActivity
+import com.buur.frederikapp.api.ErrorHandler
+import com.buur.frederikapp.controllers.StaticDataController
 import com.buur.frederikapp.fragments.search.SearchFragment
+import com.buur.frederikapp.fragments.startup.StartUpFragment
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
+import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -25,7 +29,7 @@ class MainActivity : FredActivity() {
         setContentView(R.layout.activity_main)
 
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
-        navigateToFragment(SearchFragment(), null, false )
+        navigateToFragment(StartUpFragment(), shouldAddToBackStack =  false )
 
         setupAdMob()
     }

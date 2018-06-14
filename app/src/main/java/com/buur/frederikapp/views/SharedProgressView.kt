@@ -7,7 +7,7 @@ import android.widget.FrameLayout
 import com.bumptech.glide.Glide
 import com.buur.frederikapp.R
 import com.buur.frederikapp.models.Champion
-import kotlinx.android.synthetic.main.view_champion_list_item.view.*
+import kotlinx.android.synthetic.main.view_champion_list_row.view.*
 
 class SharedProgressView : FrameLayout {
 

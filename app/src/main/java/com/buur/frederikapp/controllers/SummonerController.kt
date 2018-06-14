@@ -69,6 +69,9 @@ class SummonerController {
                     // saving summoners matches in session controller
                     SessionController.getInstance().summonerSearchResult?.matchList?.add(matchResponse)
                 }
+                .doOnError{
+                    ErrorHandler.handleError(it)
+                }
     }
 
 }

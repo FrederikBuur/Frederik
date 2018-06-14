@@ -1,4 +1,4 @@
-package com.buur.frederikapp.extensions
+package com.buur.frederikapp.devutility.extensions
 
 fun String.addChampionImagePath(version: String): String {
     return "http://ddragon.leagueoflegends.com/cdn/$version/img/champion/$this"
@@ -13,5 +13,5 @@ fun String.addItemIconImagePath(version: String): String {
 }
 
 fun String.addSummonerSpellIconImagePath(version: String): String {
-    return "http://ddragon.leagueoflegends.com/cdn/$version/img/spell/SummonerFlash.png"
+    return "http://ddragon.leagueoflegends.com/cdn/$version/img/spell/SummonerFlash.png" // TODO
 }

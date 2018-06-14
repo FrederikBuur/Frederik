@@ -3,9 +3,9 @@ package com.buur.frederikapp.fragments.summoner
 import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
-import com.buur.frederikapp.fragments.summoner.views.SummonerMatchItemView
+import com.buur.frederikapp.fragments.summoner.views.SummonerMatchRowView
 import com.buur.frederikapp.fragments.summoner.views.SummonerMatchProgressView
-import com.buur.frederikapp.fragments.summoner.views.SummonerSuperItemView
+import com.buur.frederikapp.fragments.summoner.views.SummonerSuperRowView
 import com.buur.frederikapp.modelsapi.match.MatchResponse
 
 class SummonerMatchlistAdapter(var context: Context, var matchList: ArrayList<MatchResponse>?) : RecyclerView.Adapter<SummonerMatchlistAdapter.MatchViewHolder>() {
@@ -13,7 +13,7 @@ class SummonerMatchlistAdapter(var context: Context, var matchList: ArrayList<Ma
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MatchViewHolder {
 
         return MatchViewHolder(when(viewType) {
-            MatchlistItemType.Match.ordinal -> SummonerMatchItemView(context)
+            MatchlistItemType.Match.ordinal -> SummonerMatchRowView(context)
             else -> SummonerMatchProgressView(context)
         })
 
@@ -25,7 +25,7 @@ class SummonerMatchlistAdapter(var context: Context, var matchList: ArrayList<Ma
         val match = getMatch(position)
 
         when(itemView) {
-            is SummonerMatchItemView -> itemView.setup(match)
+            is SummonerMatchRowView -> itemView.setup(match)
             else -> {
                 itemView
             }
@@ -50,7 +50,7 @@ class SummonerMatchlistAdapter(var context: Context, var matchList: ArrayList<Ma
         return matchList?.size ?: 0
     }
 
-    inner class MatchViewHolder(container: SummonerSuperItemView) : RecyclerView.ViewHolder(container) {
+    inner class MatchViewHolder(container: SummonerSuperRowView) : RecyclerView.ViewHolder(container) {
         init {
         }
     }
