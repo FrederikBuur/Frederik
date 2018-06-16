@@ -3,14 +3,12 @@ package com.buur.frederikapp.fragments.summoner.views
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
-import android.widget.FrameLayout
 import android.widget.RelativeLayout
-import com.bumptech.glide.Glide
 import com.buur.frederikapp.R
 import com.buur.frederikapp.devutility.ImageLoader
 import com.buur.frederikapp.devutility.extensions.addItemIconImagePath
 import com.buur.frederikapp.devutility.extensions.addSummonerSpellIconImagePath
-import com.buur.frederikapp.models.Item
+import com.buur.frederikapp.models.SummonerSpell
 import com.buur.frederikapp.models.Version
 import com.buur.frederikapp.modelsapi.match.Participant
 import io.realm.Realm
@@ -31,8 +29,11 @@ class SummonerMatchItemSpellView : RelativeLayout {
         Realm.getDefaultInstance().use { realm ->
             Version.getLocalVersion(realm)?.let { version ->
 
-                val spell1 = participant?.spell1Id.toString().addSummonerSpellIconImagePath(version)
-                val spell2 = participant?.spell2Id.toString().addSummonerSpellIconImagePath(version)
+                val spellOneKey = SummonerSpell.getSummonerSpellKey(realm, participant?.spell1Id)
+                val spellOneUrl = spellOneKey?.addSummonerSpellIconImagePath(version)
+
+                val spellTwoKey = SummonerSpell.getSummonerSpellKey(realm, participant?.spell2Id)
+                val spellTwoUrl = spellTwoKey?.addSummonerSpellIconImagePath(version)
 
                 val item0 = participant?.stats?.item0.toString().addItemIconImagePath(version)
                 val item1 = participant?.stats?.item1.toString().addItemIconImagePath(version)
@@ -42,8 +43,8 @@ class SummonerMatchItemSpellView : RelativeLayout {
                 val item5 = participant?.stats?.item5.toString().addItemIconImagePath(version)
                 val item6 = participant?.stats?.item6.toString().addItemIconImagePath(version)
 
-                ImageLoader.InsertImage(context, championSpell1, spell1)
-                ImageLoader.InsertImage(context, championSpell2, spell2)
+                ImageLoader.InsertImage(context, championSpell1, spellOneUrl)
+                ImageLoader.InsertImage(context, championSpell2, spellTwoUrl)
 
                 ImageLoader.InsertImage(context, championItem0, item0)
                 ImageLoader.InsertImage(context, championItem1, item1)

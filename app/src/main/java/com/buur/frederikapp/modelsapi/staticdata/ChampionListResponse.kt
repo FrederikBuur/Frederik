@@ -1,4 +1,4 @@
-package com.buur.frederikapp.modelsapi
+package com.buur.frederikapp.modelsapi.staticdata
 
 import com.buur.frederikapp.models.Champion
 

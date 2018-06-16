@@ -13,5 +13,5 @@ fun String.addItemIconImagePath(version: String): String {
 }
 
 fun String.addSummonerSpellIconImagePath(version: String): String {
-    return "http://ddragon.leagueoflegends.com/cdn/$version/img/spell/SummonerFlash.png" // TODO
+    return "http://ddragon.leagueoflegends.com/cdn/$version/img/spell/$this.png"
 }

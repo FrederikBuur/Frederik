@@ -6,8 +6,9 @@ import com.buur.frederikapp.api.ServiceGenerator
 import com.buur.frederikapp.api.ServiceGenerator.Companion.API_KEY
 import com.buur.frederikapp.api.interfaces.IStaticData
 import com.buur.frederikapp.models.Version
-import com.buur.frederikapp.modelsapi.ChampionListResponse
-import com.buur.frederikapp.modelsapi.ItemListResponse
+import com.buur.frederikapp.modelsapi.staticdata.ChampionListResponse
+import com.buur.frederikapp.modelsapi.staticdata.ItemListResponse
+import com.buur.frederikapp.modelsapi.staticdata.SummonerSpellsListResponse
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -59,6 +60,23 @@ class StaticDataController {
                     ErrorHandler.handleError(error)
                 }
 
+    }
+
+    fun fetchSummonerSpellData() : Observable<SummonerSpellsListResponse> {
+
+        return getStaticDataClient().getSummonerSpells(API_KEY, true)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnNext { summonerSpellList ->
+                    Realm.getDefaultInstance().use { realm ->
+                        realm.executeTransaction { innerRealm ->
+                            innerRealm.copyToRealmOrUpdate(summonerSpellList.data.values)
+                        }
+                    }
+                }
+                .doOnError {  error ->
+                    ErrorHandler.handleError(error)
+                }
     }
 
     fun getVersions() : Observable<ArrayList<String>> {

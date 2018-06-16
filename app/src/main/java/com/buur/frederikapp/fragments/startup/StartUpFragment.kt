@@ -11,6 +11,7 @@ import com.buur.frederikapp.fragments.FredFragment
 import com.buur.frederikapp.fragments.search.SearchFragment
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.functions.Function4
 import io.reactivex.rxkotlin.Observables
 
 class StartUpFragment : FredFragment() {
@@ -40,15 +41,23 @@ class StartUpFragment : FredFragment() {
         val version = staticDataController.getVersions()
         val champions = staticDataController.fetchChampions()
         val items = staticDataController.fetchItemData()
+        val summonerSpells = staticDataController.fetchSummonerSpellData()
 
-        Observables.zip(version, champions, items)
+        val jobs = ArrayList<Observable<*>>()
+
+        jobs.add(version)
+        jobs.add(champions)
+        jobs.add(items)
+        jobs.add(summonerSpells)
+
+        Observable.zip(jobs, { _ -> })
                 .compose(bindToLifecycle())
                 .observeOn(AndroidSchedulers.mainThread())
                 .onErrorResumeNext(Observable.empty())
                 .doFinally {
                     mainActivity?.navigateToFragment(SearchFragment(), shouldAddToBackStack = false)
                 }
-                .subscribe({ _ ->
+                .subscribe({
                     Log.d("StartUpFragment", "All static data done")
                 }, { _ ->
                 })
