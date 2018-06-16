@@ -14,6 +14,7 @@ allprojects {
         maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
         maven { url "https://jitpack.io" }
         maven { url "https://maven.google.com" }
+        maven { url 'https://github.com/WickeDev/stetho-realm/raw/master/maven-repo' }
         google()
     }
     buildscript {
